@@ -13,7 +13,6 @@ void generateSudoku(int n, int m, int mat[n][m]) {
    		}
    	}
 
-// todo
    	for (i=0; i<n; i++) {
    		for (j=0; j<m; j++) {
    			lineFlag = 0;
