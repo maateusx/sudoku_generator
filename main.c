@@ -219,8 +219,6 @@ void printGame(int game[9][9])
 {
   int i, j, lCount, cCount;
 
-  printf("\n--- Solved Game Generated ---\n\n");
-
   lCount = 0;
   for (i = 0; i < 9; i++)
   {
@@ -291,10 +289,23 @@ void generateBaseGame(Sudoku *puzzle)
   initializePuzzle(puzzle);
   createSeed(puzzle);
   genPuzzle(puzzle);
+  printf("\n--- Solved Game Generated ---\n\n");
   printGame(puzzle->solnGrid);
 }
 
-void generate(int originGame[9][9], int off, char *fileName)
+void storeGame(int from[9][9], int to[9][9])
+{
+	int i, j;
+	for (i = 0; i < 9; i++)
+	{
+		for (j = 0; j < 9; j++)
+		{
+			to[i][j] = from[i][j];
+		}
+	}
+}
+
+void generate(int originGame[9][9], int to[9][9], int off, char *fileName)
 {
   int i, j, line, col, game[9][9];
 
@@ -317,44 +328,76 @@ void generate(int originGame[9][9], int off, char *fileName)
     }
   }
 
+  storeGame(game, to);
   persistGame(game, fileName);
 }
 
-void generateEasyGame(int originGame[9][9], char *fileName)
+void generateEasyGame(int originGame[9][9], int to[9][9], char *fileName)
 {
   int off = 37;
-  generate(originGame, off, fileName);
+  generate(originGame, to, off, fileName);
 }
 
-void generateMediumGame(int originGame[9][9], char *fileName)
+void generateMediumGame(int originGame[9][9], int to[9][9], char *fileName)
 {
   int off = 48;
-  generate(originGame, off, fileName);
+  generate(originGame, to, off, fileName);
 }
 
-void generateHardGame(int originGame[9][9], char *fileName)
+void generateHardGame(int originGame[9][9], int to[9][9], char *fileName)
 {
   int off = 56;
-  generate(originGame, off, fileName);
+  generate(originGame, to, off, fileName);
 }
 
 int main()
 {
   Sudoku puzzle;
+  int easyGame_1[9][9], easyGame_2[9][9], easyGame_3[9][9], mediumGame_1[9][9], mediumGame_2[9][9], mediumGame_3[9][9], hardGame_1[9][9], hardGame_2[9][9], hardGame_3[9][9], op;
 
   srand(time(NULL));
 
   generateBaseGame(&puzzle);
 
-  generateEasyGame(puzzle.solnGrid, "easyGame_1.txt");
-  generateEasyGame(puzzle.solnGrid, "easyGame_2.txt");
-  generateEasyGame(puzzle.solnGrid, "easyGame_3.txt");
-  generateMediumGame(puzzle.solnGrid, "mediumGame_1.txt");
-  generateMediumGame(puzzle.solnGrid, "mediumGame_2.txt");
-  generateMediumGame(puzzle.solnGrid, "mediumGame_3.txt");
-  generateHardGame(puzzle.solnGrid, "hardGame_1.txt");
-  generateHardGame(puzzle.solnGrid, "hardGame_2.txt");
-  generateHardGame(puzzle.solnGrid, "hardGame_3.txt");
+  generateEasyGame(puzzle.solnGrid, easyGame_1, "easyGame_1.txt");
+  generateEasyGame(puzzle.solnGrid, easyGame_2, "easyGame_2.txt");
+  generateEasyGame(puzzle.solnGrid, easyGame_3, "easyGame_3.txt");
+  generateMediumGame(puzzle.solnGrid, mediumGame_1, "mediumGame_1.txt");
+  generateMediumGame(puzzle.solnGrid, mediumGame_2, "mediumGame_2.txt");
+  generateMediumGame(puzzle.solnGrid, mediumGame_3, "mediumGame_3.txt");
+  generateHardGame(puzzle.solnGrid, hardGame_1, "hardGame_1.txt");
+  generateHardGame(puzzle.solnGrid, hardGame_2, "hardGame_2.txt");
+  generateHardGame(puzzle.solnGrid, hardGame_3, "hardGame_3.txt");
+
+  
+  printf("Enter the desired game:\n");
+  printf("1- easy game 1\n");
+  printf("2- easy game 2\n");
+  printf("3- easy game 3\n");
+  printf("4- medium game 1\n");
+  printf("5- medium game 2\n");
+  printf("6- medium game 3\n");
+  printf("7- hard game 1\n");
+  printf("8- hard game 2\n");
+  printf("9- hard game 3\n");
+  printf("\n");
+  printf("chosen: ");
+  scanf("%i", &op);
+  printf("\n");
+
+  switch (op)
+  {
+  	case 1: printGame(easyGame_1); break;
+  	case 2: printGame(easyGame_2); break;
+  	case 3: printGame(easyGame_3); break;
+  	case 4: printGame(mediumGame_1); break;
+  	case 5: printGame(mediumGame_2); break;
+  	case 6: printGame(mediumGame_3); break;
+  	case 7: printGame(hardGame_1); break;
+  	case 8: printGame(hardGame_2); break;
+  	case 9: printGame(hardGame_3); break;
+  }
+
 
   return 0;
 }
