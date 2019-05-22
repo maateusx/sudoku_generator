@@ -284,7 +284,6 @@ void generate(int originGame[9][9], int off, char *fileName) {
 	}
 
 	persistGame(game, fileName);
-	printGame(game);
 }
 
 void generateEasyGame(int originGame[9][9], char *fileName) {
