@@ -295,14 +295,14 @@ void generateBaseGame(Sudoku *puzzle)
 
 void storeGame(int from[9][9], int to[9][9])
 {
-	int i, j;
-	for (i = 0; i < 9; i++)
-	{
-		for (j = 0; j < 9; j++)
-		{
-			to[i][j] = from[i][j];
-		}
-	}
+  int i, j;
+  for (i = 0; i < 9; i++)
+  {
+    for (j = 0; j < 9; j++)
+    {
+      to[i][j] = from[i][j];
+    }
+  }
 }
 
 void generate(int originGame[9][9], int to[9][9], int off, char *fileName)
@@ -369,35 +369,55 @@ int main()
   generateHardGame(puzzle.solnGrid, hardGame_2, "hardGame_2.txt");
   generateHardGame(puzzle.solnGrid, hardGame_3, "hardGame_3.txt");
 
-  
-  printf("Enter the desired game:\n");
-  printf("1- easy game 1\n");
-  printf("2- easy game 2\n");
-  printf("3- easy game 3\n");
-  printf("4- medium game 1\n");
-  printf("5- medium game 2\n");
-  printf("6- medium game 3\n");
-  printf("7- hard game 1\n");
-  printf("8- hard game 2\n");
-  printf("9- hard game 3\n");
-  printf("\n");
-  printf("chosen: ");
-  scanf("%i", &op);
-  printf("\n");
-
-  switch (op)
+  do
   {
-  	case 1: printGame(easyGame_1); break;
-  	case 2: printGame(easyGame_2); break;
-  	case 3: printGame(easyGame_3); break;
-  	case 4: printGame(mediumGame_1); break;
-  	case 5: printGame(mediumGame_2); break;
-  	case 6: printGame(mediumGame_3); break;
-  	case 7: printGame(hardGame_1); break;
-  	case 8: printGame(hardGame_2); break;
-  	case 9: printGame(hardGame_3); break;
-  }
+    printf("Enter the desired game:\n");
+    printf("1- Easy Game 1\n");
+    printf("2- Easy Game 2\n");
+    printf("3- Easy Game 3\n");
+    printf("4- Medium Game 1\n");
+    printf("5- Medium Game 2\n");
+    printf("6- Medium Game 3\n");
+    printf("7- Hard Game 1\n");
+    printf("8- Hard Game 2\n");
+    printf("9- Hard Game 3\n");
+    printf("0- Exit\n");
+    printf("\n");
+    printf("Chosen: ");
+    scanf("%i", &op);
+    printf("\n");
 
+    switch (op)
+    {
+    case 1:
+      printGame(easyGame_1);
+      break;
+    case 2:
+      printGame(easyGame_2);
+      break;
+    case 3:
+      printGame(easyGame_3);
+      break;
+    case 4:
+      printGame(mediumGame_1);
+      break;
+    case 5:
+      printGame(mediumGame_2);
+      break;
+    case 6:
+      printGame(mediumGame_3);
+      break;
+    case 7:
+      printGame(hardGame_1);
+      break;
+    case 8:
+      printGame(hardGame_2);
+      break;
+    case 9:
+      printGame(hardGame_3);
+      break;
+    }
+  } while (op != 0);
 
   return 0;
 }
